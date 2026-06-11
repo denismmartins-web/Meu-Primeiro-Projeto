@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Configura os caracteres para aceitar acentos e ç -->
+  <!-- Define o padrão de caracteres da página, permitindo acentos e caracteres especiais -->
   <meta charset="UTF-8">
 
-  <!-- Faz a página se adaptar melhor ao celular e ao computador -->
+  <!-- Faz a página se adaptar ao tamanho da tela, principalmente em celulares -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Título que aparece na aba do navegador -->
   <title>Meu Perfil</title>
 
   <style>
-    /* Remove os espaços padrões que o navegador coloca automaticamente */
+    /* Remove margens e espaçamentos padrões do navegador */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    /* Estiliza o fundo geral da página e centraliza o cartão */
+    /* Define variáveis de cores para facilitar futuras alterações */
+    :root {
+      --azul-escuro: #0f172a;
+      --azul: #1d4ed8;
+      --roxo: #7c3aed;
+      --verde: #22c55e;
+      --ciano: #38bdf8;
+      --branco: #ffffff;
+      --cinza-claro: #f1f5f9;
+      --cinza-texto: #334155;
+      --cinza-titulo: #475569;
+    }
+
+    /* Estiliza o corpo inteiro da página */
     body {
       min-height: 100vh;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1d4ed8, #7c3aed);
+      background: linear-gradient(135deg, var(--azul-escuro), var(--azul), var(--roxo));
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 2rem;
+      overflow-x: hidden;
     }
 
-    /* Cartão principal onde fica todo o conteúdo do perfil */
+    /* Cartão principal do perfil */
     .cartao {
       width: 100%;
       max-width: 520px;
@@ -37,22 +52,22 @@
       border-radius: 24px;
       overflow: hidden;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
-      transform: perspective(1000px) rotateX(2deg);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      will-change: transform;
     }
 
-    /* Efeito visual quando passa o mouse em cima do cartão */
+    /* Efeito visual quando passa o mouse no cartão pelo computador */
     .cartao:hover {
-      transform: perspective(1000px) rotateX(0deg) translateY(-8px);
       box-shadow: 0 35px 70px rgba(0, 0, 0, 0.45);
     }
 
-    /* Parte superior do cartão com fundo colorido */
+    /* Parte superior do cartão */
     .topo {
       background: linear-gradient(135deg, #020617, #1e40af, #9333ea);
       text-align: center;
       padding: 2.5rem 1.5rem;
-      color: white;
+      color: var(--branco);
     }
 
     /* Avatar circular com as iniciais */
@@ -61,18 +76,18 @@
       height: 90px;
       margin: 0 auto 16px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #38bdf8, #22c55e);
+      background: linear-gradient(135deg, var(--ciano), var(--verde));
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 34px;
       font-weight: bold;
-      color: white;
+      color: var(--branco);
       border: 4px solid rgba(255, 255, 255, 0.85);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
     }
 
-    /* Nome principal */
+    /* Nome principal no topo do cartão */
     .topo h1 {
       font-size: 26px;
       margin-bottom: 8px;
@@ -84,35 +99,35 @@
       color: #dbeafe;
     }
 
-    /* Área branca do conteúdo */
+    /* Área branca onde ficam as informações */
     .corpo {
       padding: 2rem;
     }
 
-    /* Títulos pequenos das seções */
+    /* Títulos das seções, como Sobre mim, Skills e Links */
     .secao-titulo {
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #475569;
+      color: var(--cinza-titulo);
       margin-top: 1.6rem;
       margin-bottom: 10px;
       font-weight: bold;
     }
 
-    /* Remove a margem de cima apenas do primeiro título */
+    /* Remove a margem superior apenas do primeiro título */
     .secao-titulo:first-child {
       margin-top: 0;
     }
 
-    /* Texto da seção sobre mim */
+    /* Texto da seção Sobre mim */
     .sobre {
       font-size: 15px;
-      color: #334155;
+      color: var(--cinza-texto);
       line-height: 1.7;
     }
 
-    /* Área onde ficam as habilidades */
+    /* Área das habilidades */
     .skills {
       display: flex;
       flex-wrap: wrap;
@@ -131,19 +146,19 @@
       transition: transform 0.3s ease;
     }
 
-    /* Efeito ao passar o mouse nas habilidades */
+    /* Efeito ao passar o mouse em uma skill */
     .tag:hover {
       transform: translateY(-3px) scale(1.05);
     }
 
-    /* Cada linha de link ou contato */
+    /* Linha de link ou contato */
     .link-item {
       font-size: 14px;
-      color: #1d4ed8;
+      color: var(--azul);
       margin-bottom: 10px;
       padding: 10px 12px;
       border-radius: 12px;
-      background: #f1f5f9;
+      background: var(--cinza-claro);
       transition: background 0.3s ease, transform 0.3s ease;
     }
 
@@ -162,25 +177,91 @@
       color: #64748b;
       text-align: center;
     }
+
+    /* Botão usado em alguns celulares para liberar o efeito de movimento */
+    .botao-movimento {
+      display: none;
+      margin-top: 1rem;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 999px;
+      background: var(--branco);
+      color: var(--azul);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Efeito visual no botão ao passar o mouse */
+    .botao-movimento:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Ajustes para telas menores, como celulares */
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+
+      .cartao {
+        max-width: 360px;
+        border-radius: 20px;
+      }
+
+      .topo {
+        padding: 2rem 1rem;
+      }
+
+      .avatar {
+        width: 76px;
+        height: 76px;
+        font-size: 28px;
+      }
+
+      .topo h1 {
+        font-size: 22px;
+      }
+
+      .topo p {
+        font-size: 14px;
+      }
+
+      .corpo {
+        padding: 1.4rem;
+      }
+
+      .sobre {
+        font-size: 14px;
+      }
+
+      .tag {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      .link-item {
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Cartão principal -->
-  <div class="cartao">
+  <!-- Cartão principal que agrupa todo o conteúdo do perfil -->
+  <div class="cartao" id="cartao">
 
-    <!-- Topo com avatar, nome e subtítulo -->
+    <!-- Topo do cartão com avatar, nome e subtítulo -->
     <div class="topo">
       <div class="avatar">DM</div>
       <h1>Denis Martins</h1>
       <p>Estudante de desenvolvimento full-stack</p>
     </div>
 
-    <!-- Corpo com as informações -->
+    <!-- Corpo do cartão com informações pessoais -->
     <div class="corpo">
 
-      <!-- Seção sobre mim -->
+      <!-- Seção Sobre mim -->
       <p class="secao-titulo">Sobre mim</p>
       <p class="sobre">
         Em desenvolvimento na área de tecnologia, com foco em criar projetos reais,
@@ -188,7 +269,7 @@
         organização e aprendizado contínuo.
       </p>
 
-      <!-- Seção de habilidades -->
+      <!-- Seção Skills -->
       <p class="secao-titulo">Skills</p>
       <div class="skills">
         <span class="tag">HTML</span>
@@ -198,18 +279,121 @@
         <span class="tag">GitHub</span>
       </div>
 
-      <!-- Seção de links -->
+      <!-- Seção Links -->
       <p class="secao-titulo">Links</p>
       <div class="link-item">GitHub: github.com/seu-usuario</div>
       <div class="link-item">E-mail: denis.dm@email.com</div>
 
-      <!-- Rodapé -->
+      <!-- Rodapé do cartão -->
       <div class="rodape">
         Primeiro projeto publicado no GitHub.
       </div>
 
     </div>
   </div>
+
+  <!-- Botão usado em alguns celulares para ativar o movimento do aparelho -->
+  <button class="botao-movimento" id="botaoMovimento">
+    Ativar efeito no celular
+  </button>
+
+  <script>
+    /* Seleciona o cartão pelo id para aplicar os efeitos de movimento */
+    const cartao = document.getElementById("cartao");
+
+    /* Seleciona o botão que pode liberar o sensor em alguns celulares */
+    const botaoMovimento = document.getElementById("botaoMovimento");
+
+    /* Define o limite máximo da rotação para o efeito não ficar exagerado */
+    const limiteRotacao = 10;
+
+    /* Função que aplica a rotação no cartão */
+    function aplicarRotacao(rotacaoX, rotacaoY) {
+      cartao.style.transform = `
+        perspective(1000px)
+        rotateX(${rotacaoX}deg)
+        rotateY(${rotacaoY}deg)
+      `;
+    }
+
+    /* Função que volta o cartão para a posição normal */
+    function resetarRotacao() {
+      cartao.style.transform = `
+        perspective(1000px)
+        rotateX(0deg)
+        rotateY(0deg)
+      `;
+    }
+
+    /* Função que limita um valor entre um mínimo e um máximo */
+    function limitarValor(valor, minimo, maximo) {
+      return Math.min(Math.max(valor, minimo), maximo);
+    }
+
+    /* Efeito de movimento usando o mouse no computador */
+    cartao.addEventListener("mousemove", function (evento) {
+      const area = cartao.getBoundingClientRect();
+
+      const centroX = area.left + area.width / 2;
+      const centroY = area.top + area.height / 2;
+
+      const posicaoMouseX = evento.clientX - centroX;
+      const posicaoMouseY = evento.clientY - centroY;
+
+      const rotacaoY = limitarValor((posicaoMouseX / area.width) * limiteRotacao * 2, -limiteRotacao, limiteRotacao);
+      const rotacaoX = limitarValor((posicaoMouseY / area.height) * -limiteRotacao * 2, -limiteRotacao, limiteRotacao);
+
+      aplicarRotacao(rotacaoX, rotacaoY);
+    });
+
+    /* Quando o mouse sai do cartão, ele volta ao normal */
+    cartao.addEventListener("mouseleave", function () {
+      resetarRotacao();
+    });
+
+    /* Função que usa a inclinação do celular para movimentar o cartão */
+    function efeitoMovimentoCelular(evento) {
+      const inclinacaoFrenteTras = evento.beta;
+      const inclinacaoLado = evento.gamma;
+
+      if (inclinacaoFrenteTras === null || inclinacaoLado === null) {
+        return;
+      }
+
+      const rotacaoX = limitarValor(inclinacaoFrenteTras / 6, -limiteRotacao, limiteRotacao);
+      const rotacaoY = limitarValor(inclinacaoLado / 4, -limiteRotacao, limiteRotacao);
+
+      aplicarRotacao(rotacaoX, rotacaoY);
+    }
+
+    /* Função que ativa o sensor de movimento do celular */
+    function ativarMovimentoCelular() {
+      window.addEventListener("deviceorientation", efeitoMovimentoCelular);
+    }
+
+    /* Verifica se o navegador exige permissão para usar o sensor */
+    if (
+      typeof DeviceOrientationEvent !== "undefined" &&
+      typeof DeviceOrientationEvent.requestPermission === "function"
+    ) {
+      botaoMovimento.style.display = "block";
+
+      botaoMovimento.addEventListener("click", function () {
+        DeviceOrientationEvent.requestPermission()
+          .then(function (resposta) {
+            if (resposta === "granted") {
+              ativarMovimentoCelular();
+              botaoMovimento.style.display = "none";
+            }
+          })
+          .catch(function () {
+            botaoMovimento.textContent = "Não foi possível ativar o movimento";
+          });
+      });
+    } else {
+      ativarMovimentoCelular();
+    }
+  </script>
 
 </body>
 </html>
