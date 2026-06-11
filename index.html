@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil</title>
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .cartao {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .topo {
+      background-color: #1a1a2e;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background-color: #378ADD;
+      color: white;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .topo h1 {
+      color: #f0f4f8;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .topo p {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .corpo {
+      padding: 1.5rem;
+    }
+
+    .secao-titulo {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #64748b;
+      margin-bottom: 10px;
+      margin-top: 1.25rem;
+    }
+
+    .secao-titulo:first-child {
+      margin-top: 0;
+    }
+
+    .sobre {
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.7;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      background: #E6F1FB;
+      color: #0C447C;
+      font-size: 12px;
+      padding: 3px 12px;
+      border-radius: 99px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #185FA5;
+      margin-bottom: 8px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="cartao">
+
+    <div class="topo">
+      <div class="avatar">JS</div>
+      <h1>João Silva</h1>
+      <p>Estudante de desenvolvimento fullstack</p>
+    </div>
+
+    <div class="corpo">
+
+      <p class="secao-titulo">Sobre mim</p>
+      <p class="sobre">
+        Aprendendo programação do zero, com foco em construir projetos reais.
+        Apaixonado por tecnologia e design.
+      </p>
+
+      <p class="secao-titulo">Skills</p>
+      <div class="skills">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Git</span>
+      </div>
+
+      <p class="secao-titulo">Links</p>
+      <div class="link-item">github.com/joaosilva</div>
+      <div class="link-item">joao@email.com</div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
